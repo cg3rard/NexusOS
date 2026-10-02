@@ -1,15 +1,27 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { Bell, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const pageTitles: Record<string, string> = {
+  "/": "Overview",
+  "/assets": "Assets",
+  "/analytics": "Analytics",
+  "/maintenance": "Maintenance",
+  "/performance": "Performance",
+};
+
 export function DashboardHeader() {
+  const pathname = usePathname();
+  const title = pageTitles[pathname] ?? "Overview";
+
   return (
     <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="flex h-16 items-center justify-between px-6 lg:px-10">
         <div>
           <h1 className="text-[17px] font-semibold tracking-tight text-foreground">
-            Overview
+            {title}
           </h1>
           <p className="text-[12.5px] text-muted-foreground">
             Gulf Coast Refinery &amp; Petrochemical Complex
